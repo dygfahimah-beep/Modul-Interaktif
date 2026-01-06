@@ -1,0 +1,288 @@
+/* ===== BODY ===== */
+body {
+  font-family: 'Comfortaa', sans-serif;
+  background: url("../images/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* MENU PAGE SAHAJA */
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* ===== WELCOME BAR ===== */
+.welcome-bar h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;  /* jarak ke login box */
+  text-align: center;
+}
+
+
+/* ===== LOGIN CONTAINER ===== */
+.login-container {
+  text-align: center;
+  width: 430px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.login-container h2 {
+  color: #414089;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.bold-title {
+  font-weight: 1000;
+}
+
+.login-container p {
+  font-size: 15px;
+  color: #141016;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #578dc6;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #436fa0;
+}
+
+/* ================= DASHBOARD / MENU PAGE ================= */
+
+/* Center content */
+body.menu-page {
+  min-height: 100vh;
+  padding: 40px 5px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/*Menu text*/
+.menu-title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fdfdfd;
+}
+
+/*Menu container )*/
+.menu {
+  max-width: 360px;
+  margin: 0 auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  display: flex;
+  border-radius: 50px;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/*Menu buttons*/
+.menu a {
+  width: 290px;
+  margin: 10px 0;
+  padding: 15px;
+  background: #fdfeff;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/*Hover effect*/
+.menu a:hover {
+  background: #1a5fd1;
+}
+
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 22px;
+  background: #1a237e;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+  z-index: 999;
+}
+
+.back-btn:hover {
+  background: #3949ab;
+} 
+
+/* Responsive */
+/* Tablet - 768px and below */
+@media (max-width: 768px) {
+.login-container {
+  text-align: center;
+  width: 300px;
+  padding: 15px;
+  height: 230px;
+  margin-top: 5px;
+}
+
+.login-container h2 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.login-container p {
+  font-size: 10px;
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+input {
+  width: 90%;
+  box-sizing: border-box;
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+button {
+  width: 90%;
+  padding: 9px;
+  margin-top: 8px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+}
+
+/*Phone*/
+@media (max-width: 425px) {
+.login-container {
+  text-align: center;
+  width: 250px;
+  padding: 15px;
+  height: 180px;;
+  margin-top: 5px;
+}
+
+.login-container h2 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 17px;
+}
+
+.login-container p {
+  font-size: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 90%;
+  box-sizing: border-box;
+  padding: 6px;
+  margin: 6px 0;
+  border-radius: 6px;
+  font-size: 8px;
+}
+
+button {
+  width: 90%;
+  padding: 7px;
+  margin-top: 5px;
+  border-radius: 6px;
+  font-size: 9px;
+}
+}
+
+/* ================= MENU PAGE RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+
+    body.menu-page {
+    padding-top: 80px;
+  }
+
+  .menu-title {
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+
+  .menu {
+    max-width: 300px;
+    padding: 20px;
+    border-radius: 25px;
+  }
+
+  .menu a {
+    width: 100%;
+    max-width: 260px;
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* Phone */
+@media (max-width: 450px) {
+
+  body.menu-page {
+    padding-top: 80px;
+  }
+
+  .menu-title {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .menu {
+    max-width: 240px;
+    padding: 15px;
+    border-radius: 40px;
+  }
+
+  .menu a {
+    max-width: 200px;
+    font-size: 13px;
+    padding: 9px;
+    border-radius: 20px;
+    margin: 5px;
+  }
+}
+
+
+

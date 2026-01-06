@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/simulation.css">
+  <title>🎓 Modul Interaktif: Undang-undang Nombor Besar (LLN)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0"></script>
+  <style>
+
+    body.simulation-page {
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #f5f8ff, #eef2ff);
+      margin: 0;
+      padding: 25px;
+    }
+    h1 {
+      color: #1a237e;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #333;
+      max-width: 700px;
+      margin: 10px auto;
+      font-size: 1.05em;
+      line-height: 1.6em;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: auto ;
+      width: 90%;
+      max-width: 850px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 2px;
+      font-weight: 500;
+
+    }
+    input[type="range"] {
+      width: 100%;
+      max-width: 350px;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    canvas {
+      display: block;
+      width: 100% !important;
+      max-width: 900px;
+      height: auto !important;
+      margin: 0;
+    }
+
+    #explanationBox {
+      background: #f0f4ff;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-top: 15px;
+      text-align: left;
+      font-size: 1em;
+      line-height: 1.6em;
+      color: #1a237e;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      width: 90%;
+      max-width: 750px;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-section {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin: 25px auto;
+      width: 90%;
+      max-width: 850px;
+    }
+    .question {
+      text-align: left;
+      margin: 15px 0;
+      background: #eef3ff;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .question p {
+      color: #1a237e;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .btn {
+      width: 99%;
+      background-color: #1a237e;
+      color: white;
+      border: none;
+      font-size: 15px;
+      border-radius: 8px;
+      padding: 8px 15px;
+      margin: 0;
+      margin-bottom: 13px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #3949ab;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+
+  </style>
+</head>
+
+<body class="simulation-page">
+  <h1>🎓 Modul Interaktif: Undang-undang Nombor Besar (LLN)</h1>
+  <p>
+    Laraskan <b>saiz sampel (n)</b> untuk melihat bagaimana bentuk taburan purata sampel berubah.
+    Apabila <i>n</i> meningkat, taburan menjadi <b>semakin sempit</b>, <b>semakin simetri</b>,
+    dan berpusat pada <b>μ = 50</b>, membuktikan konsep <i>Undang-undang Nombor Besar</i>.
+  </p>
+
+  <div class="container">
+    <label>Saiz Sampel (n): <span id="sampleLabel">5</span></label><br>
+    <input type="range" id="sampleSize" min="5" max="200" value="5" step="5">
+    <canvas id="chartCanvas"></canvas>
+
+    <div id="explanationBox">
+      <b>Penjelasan:</b> Untuk saiz sampel kecil (n < 30), taburan masih condong dan jauh dari μ = 50.
+      Ini menunjukkan purata sampel sangat dipengaruhi oleh variasi populasi.
+    </div>
+  </div>
+
+  <!-- 🌟 Bahagian Soalan Refleksi -->
+  <div class="quiz-section">
+    <h2>🧠 Refleksi Pemahaman</h2>
+    <p>Jawab soalan berikut berdasarkan pemerhatian anda terhadap graf LLN di atas.</p>
+
+    <div class="question">
+       1️⃣ Apabila saiz sampel meningkat, apakah yang berlaku kepada bentuk taburan?</p>
+      <button class="btn" onclick="checkAnswer(1, 'a')">a) Taburan menjadi semakin sempit dan menghampiri min populasi</button></br>
+      <button class="btn" onclick="checkAnswer(1, 'b')">b) Taburan menjadi semakin lebar dan jauh dari min populasi</button></br>
+      <button class="btn" onclick="checkAnswer(1, 'c')">c) Tiada perubahan berlaku</button></br>
+      <div id="feedback1" class="feedback"></div>
+    </div>
+
+    <div class="question">
+       2️⃣ Berdasarkan Undang-undang Nombor Besar (LLN), semakin besar n...</p>
+      <button class="btn" onclick="checkAnswer(2, 'a')">a) Purata sampel menjauhi purata populasi</button></br>
+      <button class="btn" onclick="checkAnswer(2, 'b')">b) Purata sampel menjadi tidak stabil</button></br>
+      <button class="btn" onclick="checkAnswer(2, 'c')">c) Purata sampel menghampiri purata populasi</button></br>
+      <div id="feedback2" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      3️⃣ Bagi n kecil (cth: n &lt; 30), taburan menunjukkan...</p>
+      <button class="btn" onclick="checkAnswer(3, 'a')">a) Purata sampel sangat dekat dengan min populasi</button></br>
+      <button class="btn" onclick="checkAnswer(3, 'b')">b) Purata sampel jauh daripada min dan bentuk tidak simetri</button></br>
+      <button class="btn" onclick="checkAnswer(3, 'c')">c) Taburan berbentuk sempurna normal</button></br>
+      <div id="feedback3" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      4️⃣ Untuk saiz sampel besar (n > 100), apakah yang berlaku kepada variasi taburan?</p>
+      <button class="btn" onclick="checkAnswer(4, 'a')">a) Variasi semakin besar, taburan menjadi lebar</button></br>
+      <button class="btn" onclick="checkAnswer(4, 'b')">b) Variasi semakin kecil, taburan menjadi sempit dan tinggi</button></br>
+      <button class="btn" onclick="checkAnswer(4, 'c')">c) Variasi kekal sama</button></br>
+      <div id="feedback4" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      5️⃣ Apakah konsep utama bagi <i>Undang-undang Nombor Besar (Law of Large Numbers)</i>?</p>
+      <button class="btn" onclick="checkAnswer(5, 'a')">a) Semakin besar saiz sampel, purata populasi semakin berubah mengikut purata sampel</button></br>
+      <button class="btn" onclick="checkAnswer(5, 'b')">b) Semakin kecil saiz sampel, purata sampel lebih hampir dengan purata populasi</button></br>
+      <button class="btn" onclick="checkAnswer(5, 'c')">c) Semakin besar saiz sampel, purata sampel semakin hampir dengan purata populasi</button></br>
+      <div id="feedback5" class="feedback"></div>
+    </div>
+
+    <!-- 🧮 Butang Kira Markah Akhir -->
+    <div style="text-align:center; margin-top:25px;">
+      <p id="finalScore" style="font-weight:bold; color:#1a237e; margin-top:10px;"></p>
+    <button class="btn" onclick="resetQuiz()" style="margin-top:20px;  width: auto; padding:8px 25px;">
+      Jawab Semula
+    </button>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById("chartCanvas").getContext("2d");
+
+function generateSamplingDistribution(n, samples = 2000) {
+  const means = [];
+  const mu = 50;
+  const sigma = 15;
+
+  for (let i = 0; i < samples; i++) {
+    let sum = 0;
+    for (let j = 0; j < n; j++) {
+      const u1 = Math.random();
+      const u2 = Math.random();
+      const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+      sum += mu + sigma * z;
+    }
+    means.push(sum / n);
+  }
+
+  const step = 1;
+  const data = [];
+
+  // ✅ PAKSA RANGE 0–100
+  for (let x = 0; x <= 100; x += step) {
+    const count = means.filter(m => m >= x && m < x + step).length;
+    data.push({ x, y: count / samples });
+  }
+
+  return data;
+}
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+      datasets: [
+    // HISTOGRAM (BASE)
+    {
+      type: "bar",
+      label: "Histogram Purata Sampel",
+      data: [],
+      parsing: false,
+      backgroundColor: "rgba(63, 81, 181, 0.5)",
+      borderWidth: 0,
+      barThickness: 12,
+      order: 1
+    },
+
+    // LINE (ATAS HISTOGRAM)
+    {
+      type: "line",
+      label: "Taburan Purata Sampel",
+      data: [],
+      parsing: false,
+      borderColor: "#3f51b5",
+      borderWidth: 2,
+      tension: 0.3,
+      pointRadius: 0,
+      fill: false,
+      order: 2
+    }
+  ]
+},
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            type: "linear",
+            title: { display: true, text: "Nilai Purata Sampel (x̄)" },
+            min: 30,
+            max: 70,
+            ticks: { stepSize: 10 },
+            grid: { color: "#e0e0e0" },
+          },
+          y: {
+            title: { display: true, text: "Kebarangkalian (f(x̄))" },
+            min: 0,
+            max: 0.35,
+            ticks: { stepSize: 0.05 },
+            grid: { color: "#f0f0f0" },
+          },
+        },
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: "Saiz Sampel (n) = 5",
+            font: { size: 16 },
+          },
+          annotation: {
+            annotations: {
+              muLine: {
+                type: 'line',
+                xMin: 50,
+                xMax: 50,
+                yMin: 0,
+                yMax: 0.35,
+                borderColor: 'red',
+                borderWidth: 2,
+                borderDash: [6, 4],
+                label: {
+                  display: true,
+                  content: 'μ = 50',
+                  color: 'red',
+                  position: 'start',
+                  yAdjust: 35,
+                  backgroundColor: 'rgba(255,255,255,0.9)',
+                  font: { size: 14, weight: 'bold' }
+                }
+              }
+            }
+          }
+        },
+        animation: { duration: 800, easing: "easeOutQuart" },
+      },
+      plugins: [Chart.registry.getPlugin('annotation')],
+    });
+
+    const explanationBox = document.getElementById("explanationBox");
+
+    function updateExplanation(n) {
+      if (n < 30) {
+        explanationBox.innerHTML = "</b> Untuk saiz sampel kecil (<b>n < 30</b>), bentuk taburan masih condong dan berbeza daripada purata populasi (μ = 50). Purata sampel sangat dipengaruhi oleh variasi data asal.";
+      } else if (n >= 30 && n <= 100) {
+        explanationBox.innerHTML = "</b> Apabila saiz sampel sederhana (<b>30 ≤ n ≤ 100</b>), taburan purata sampel semakin sempit dan simetri di sekitar μ = 50. Ini menunjukkan purata sampel mula menghampiri purata populasi.";
+      } else {
+        explanationBox.innerHTML = "</b> Untuk saiz sampel besar (<b>n > 100</b>), taburan hampir normal, sangat sempit, tinggi, dan berpusat pada μ = 50. Variasi menjadi kecil, menandakan purata sampel hampir sama dengan purata populasi. Inilah konsep utama <i>Undang-undang Nombor Besar</i>.";
+      }
+    }
+
+    function updateChart(n) {
+      const data = generateSamplingDistribution(n);
+
+      chart.data.datasets[0].data = data;
+      chart.data.datasets[1].data = data;
+
+  // ✅ UPDATE TITLE
+  chart.options.plugins.title.text = `Saiz Sampel (n) = ${n}`;
+
+  chart.update();
+
+  // ✅ UPDATE PENJELASAN
+  updateExplanation(n);
+}
+
+
+
+    document.getElementById("sampleSize").addEventListener("input", e => {
+      const n = parseInt(e.target.value);
+      document.getElementById("sampleLabel").textContent = n;
+      updateChart(n);
+    });
+
+    const answered = {};
+  
+    function checkAllAnswered() {
+  const totalQuestions = 5;
+  const answeredCount = Object.keys(answered).length;
+
+  if (answeredCount === totalQuestions) {
+    calculateScore(); // auto kira markah
+  }
+}
+
+
+  function checkAnswer(q, ans) {
+    // Kalau soalan sudah dijawab → stop
+    if (answered[q]) return;
+    answered[q] = true;
+
+    const correct = { 1: 'a', 2: 'c', 3: 'b', 4: 'b', 5: 'c' };
+    const feedback = document.getElementById("feedback" + q);
+
+    // 🔒 Disable semua button dalam soalan ini
+    const questionDiv = feedback.closest(".question");
+    const buttons = questionDiv.querySelectorAll("button");
+    buttons.forEach(btn => btn.disabled = true);
+
+    if (ans === correct[q]) {
+      feedback.textContent = "✅ Betul! Tahniah, pemahaman anda tepat.";
+      feedback.style.color = "#008800";
+    } else {
+      feedback.textContent = "❌ Kurang tepat. Cuba lihat semula bentuk taburan pada graf.";
+      feedback.style.color = "#bb0000";
+   }
+
+   checkAllAnswered();
+
+  }
+
+    // 🧮 Kira Markah Akhir
+    function calculateScore() {
+      const correct = { 1: 'a', 2: 'c', 3: 'b', 4: 'b', 5: 'c' };
+      let score = 0;
+      for (let q in correct) {
+        const feedback = document.getElementById("feedback" + q);
+        if (feedback.textContent.includes("✅")) score++;
+      }
+      document.getElementById("finalScore").textContent = `Markah akhir anda: ${score}/5 ✅`;
+    }
+    
+    function resetQuiz() {
+  // kosongkan rekod jawapan
+  for (let key in answered) {
+    delete answered[key];
+  }
+
+  // reset feedback & aktifkan semula button
+  for (let i = 1; i <= 5; i++) {
+    const feedback = document.getElementById("feedback" + i);
+    feedback.textContent = "";
+
+    const questionDiv = feedback.closest(".question");
+    const buttons = questionDiv.querySelectorAll("button");
+    buttons.forEach(btn => btn.disabled = false);
+  }
+
+  // padam markah akhir
+  document.getElementById("finalScore").textContent = "";
+}
+
+    updateChart(5);
+  </script>
+
+  <a href="../dashboard.html" class="btn-back">⬅ Kembali ke Menu</a>
+
+</body>
+</html>
